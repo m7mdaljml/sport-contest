@@ -1,0 +1,13 @@
+.loader img {
+  width: 100px;
+  animation: animate 1s ease-in-out infinite;
+}
+
+@keyframes animate {
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+}
