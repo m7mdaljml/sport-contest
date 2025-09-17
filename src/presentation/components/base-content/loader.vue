@@ -4,7 +4,7 @@
     :class="{ light: isLight, dark: !isLight }"
   >
     <div class="loader text-black">
-      <img src="../../assets/images/logo.png" alt="" />
+      <img src="../../../assets/images/logo.png" alt="" />
     </div>
   </div>
 </template>

@@ -10,10 +10,10 @@
 
     <div class="d-flex h-100" :class="{ light: isLight, dark: !isLight }">
       <!-- sidebar -->
-      <sidebar :is-light="isLight" :lang @update-route="changeRoute" />
+      <sidebar :is-light="isLight" :lang />
       <!-- body content -->
       <div name="body">
-        <component :is="compenent" />
+        <router-view />
       </div>
     </div>
   </div>
@@ -25,8 +25,7 @@ import { defineAsyncComponent, onMounted, ref, watch } from "vue";
 // vars, refs, ...
 const isLight = ref(true),
   mode = ref({ isBusy: false }),
-  lang = ref("en"),
-  compenent = ref("");
+  lang = ref("en");
 
 // methods
 const load = () => {
@@ -49,10 +48,6 @@ const changeLang = async (newLang: string) => {
   lang.value = newLang;
 };
 
-const changeRoute = (comp: any) => {
-  compenent.value = comp;
-};
-
 // watchers
 watch(lang, (newLang) => {
   document.dir = newLang === "ar" ? "rtl" : "ltr";
@@ -65,12 +60,12 @@ onMounted(() => {
 
 // components
 const MainHeader = defineAsyncComponent(
-  () => import("./components/header/index.vue")
+  () => import("../src/presentation/components/base-content/header.vue")
 );
 const Sidebar = defineAsyncComponent(
-  () => import("./components/sidebar/index.vue")
+  () => import("../src/presentation/components/base-content/sidebar.vue")
 );
 const Loader = defineAsyncComponent(
-  () => import("./components/content/loader.vue")
+  () => import("../src/presentation/components/base-content/loader.vue")
 );
 </script>

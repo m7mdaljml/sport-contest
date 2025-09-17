@@ -6,27 +6,21 @@
   >
     <ul class="nav flex-column">
       <li v-for="(route, index) in routes" :key="index">
-        <a
-          href="#"
+        <router-link
+          :to="route.path"
           class="nav-link"
           :class="{ 'text-dark': isLight, 'text-light': !isLight }"
-          @click="$emit('updateRoute', route.component)"
         >
           <font-awesome-icon :icon="route.icon" />
-          {{ (route.name as any)[lang] }}
-        </a>
+          {{ (route.meta?.label as any)[lang] }}
+        </router-link>
       </li>
     </ul>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted } from "vue";
-import { default as routes } from "../../sitemap/index";
-defineProps<{ isLight: Boolean; lang: string }>();
-const emit = defineEmits(["updateRoute"]);
+import { routes } from "../../../router/index";
 
-onMounted(() => {
-  emit("updateRoute", routes[0].component);
-});
+defineProps<{ isLight: boolean; lang: string }>();
 </script>

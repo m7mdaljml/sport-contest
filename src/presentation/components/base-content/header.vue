@@ -2,7 +2,7 @@
   <nav class="navbar header">
     <!-- logo & name -->
     <a class="navbar-brand text-light" href="#">
-      <img src="../../assets/images/logo.png" width="50" height="50" />
+      <img src="../../../assets/images/logo.png" width="50" height="50" />
       {{ name }}
     </a>
     <div class="d-flex">
@@ -29,8 +29,8 @@
 
 <script setup lang="ts">
 import { computed, toRef } from "vue";
-import { default as ar } from "../../i18n/ar";
-import { default as en } from "../../i18n/en";
+import { default as ar } from "../../../i18n/ar";
+import { default as en } from "../../../i18n/en";
 
 const props = defineProps<{ name: string; isLight: boolean; lang: string }>();
 defineEmits(["updateMood", "updateLang"]);
