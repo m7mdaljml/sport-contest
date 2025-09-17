@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar header">
     <!-- logo & name -->
-    <a class="navbar-brand text-light" href="#">
+    <a class="navbar-brand text-light mx-3" href="#">
       <img src="../../../assets/images/logo.png" width="50" height="50" />
       {{ name }}
     </a>
