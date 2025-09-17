@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import App from "./App.vue";
+import router from "./router";
 
 // css
 import "./assets/style/index.css";
@@ -18,9 +19,11 @@ import {
   faEarth,
   faHome,
   faComputer,
+  faPersonHalfDress,
 } from "@fortawesome/free-solid-svg-icons";
-library.add(faSun, faMoon, faEarth, faHome, faComputer);
+library.add(faSun, faMoon, faEarth, faHome, faComputer, faPersonHalfDress);
 
 const app = createApp(App);
 app.component("font-awesome-icon", FontAwesomeIcon);
+app.use(router);
 app.mount("#app");
