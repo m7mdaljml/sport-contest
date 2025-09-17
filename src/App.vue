@@ -63,7 +63,7 @@ const MainHeader = defineAsyncComponent(
   () => import("../src/presentation/components/base-content/header.vue")
 );
 const Sidebar = defineAsyncComponent(
-  () => import("../src/presentation/components/base-content/sidebar.vue")
+  () => import("./presentation/components/base-content/sidebar.vue")
 );
 const Loader = defineAsyncComponent(
   () => import("../src/presentation/components/base-content/loader.vue")

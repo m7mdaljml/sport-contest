@@ -1,6 +1,6 @@
 import Home from "../presentation/pages/view/home.vue";
 import Contest from "../presentation/pages/view/contest.vue";
-import Profile from "../presentation/components/base-content/profile.vue";
+import Profile from "../presentation/pages/view/profile.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 export const routes = [
@@ -22,7 +22,7 @@ export const routes = [
     path: "/profile",
     name: "Profile",
     component: Profile,
-    icon: "person-half-dress",
+    icon: "person",
     meta: { label: { en: "Profile", ar: "الملف الشخصي" } },
   },
 ];
