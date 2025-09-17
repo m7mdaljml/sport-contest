@@ -1,0 +1,20 @@
+.header {
+  background-color: #2b62ca;
+}
+
+.dark {
+  background-color: #222230;
+}
+
+.light {
+  background-color: #f6f7f9;
+}
+
+.dark-sidebar {
+  background-color: #191927;
+  border-right: 1px solid rgba(205, 205, 216, 0.05);
+}
+
+.sidebar-border {
+  border-right: 1px solid rgba(20, 20, 31, 0.05);
+}
