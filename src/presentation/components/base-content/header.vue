@@ -23,6 +23,16 @@
           {{ lang == "en" ? tGlobal.arabic : tGlobal.english }}
         </button>
       </div>
+      <!-- logout buttons -->
+      <div class="mx-2">
+        <button
+          class="btn btn-outline-light"
+          @click="$emit('logout', lang == 'en' ? 'ar' : 'en')"
+        >
+          <font-awesome-icon icon="door-open" />
+          {{ tGlobal.logout }}
+        </button>
+      </div>
     </div>
   </nav>
 </template>
@@ -33,7 +43,7 @@ import { default as ar } from "../../../i18n/ar";
 import { default as en } from "../../../i18n/en";
 
 const props = defineProps<{ name: string; isLight: boolean; lang: string }>();
-defineEmits(["updateMood", "updateLang"]);
+defineEmits(["updateMood", "updateLang", "logout"]);
 
 // computed
 const tGlobal = computed(() => (lang.value === "en" ? en : ar));

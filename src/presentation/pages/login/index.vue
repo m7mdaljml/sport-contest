@@ -59,7 +59,6 @@
       </div>
 
       <!-- Error Message -->
-      {{ loginState }}
       <div v-if="!loginState" class="mt-3 text-danger fw-medium">
         {{ tGlobal.invalidLogin }}
       </div>

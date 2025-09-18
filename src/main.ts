@@ -20,9 +20,10 @@ import {
   faHome,
   faComputer,
   faPerson,
+  faDoorOpen,
 } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faSun, faMoon, faEarth, faHome, faComputer, faPerson);
+library.add(faSun, faMoon, faEarth, faHome, faComputer, faPerson, faDoorOpen);
 
 const app = createApp(App);
 app.component("font-awesome-icon", FontAwesomeIcon);
