@@ -3,4 +3,10 @@ export default {
   light: "Light",
   arabic: "Arabic",
   english: "English",
+  enterUserName: "Enter User Name",
+  enterPass: "Enter Password",
+  userName: "User Name",
+  password: "Password",
+  login: "Login",
+  invalidLogin: "Invalid username or password",
 };
