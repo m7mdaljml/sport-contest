@@ -8,5 +8,6 @@ export default {
   userName: "User Name",
   password: "Password",
   login: "Login",
+  logout: "Logout",
   invalidLogin: "Invalid username or password",
 };

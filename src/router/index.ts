@@ -7,7 +7,7 @@ import { createRouter, createWebHistory } from "vue-router";
 export const routes = [
   {
     path: "/home",
-    name: "Home",
+    name: "home",
     component: Home,
     icon: "home",
     meta: { label: { en: "Home", ar: "الرئيسية" } },
@@ -32,6 +32,17 @@ export const routes = [
     component: Login,
     icon: "person",
     meta: { label: { en: "Login", ar: "تسجيل الدخول" } },
+  },
+
+  // Redirect root to login
+  {
+    path: "/",
+    redirect: "/login",
+  },
+  // Catch all unmatched routes and redirect to login
+  {
+    path: "/:pathMatch(.*)*",
+    redirect: "/login",
   },
 ];
 

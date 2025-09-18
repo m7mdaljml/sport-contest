@@ -5,7 +5,12 @@
     style="width: 280px"
   >
     <ul class="nav flex-column">
-      <li v-for="(route, index) in routes" :key="index">
+      <li
+        v-for="(route, index) in routes.filter(
+          (r) => r.name && r.name !== 'login'
+        )"
+        :key="index"
+      >
         <router-link
           :to="route.path"
           class="nav-link"
