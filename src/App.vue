@@ -1,6 +1,11 @@
 <template>
   <div v-if="!loggedIn">
-    <router-view :loginState @validate-login="validateLogin" />
+    <router-view
+      :loginState
+      :lang
+      :loginMessage
+      @validate-login="validateLogin"
+    />
   </div>
   <div v-else>
     <div v-if="!mode.isBusy" class="vh-100">
@@ -25,8 +30,13 @@
   </div>
 </template>
 <script setup lang="ts">
-import { defineAsyncComponent, onMounted, ref, watch } from "vue";
+import { defineAsyncComponent, onMounted, ref, watch, type Ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import {
+  validate,
+  type THashMap,
+  type TValidationResult,
+} from "./presentation/utilities/validate";
 
 // vars, refs, ...
 const isLight = ref(true),
@@ -34,8 +44,10 @@ const isLight = ref(true),
   lang = ref("en"),
   router = useRouter(),
   route = useRoute(),
-  loggedIn = ref(false),
-  loginState = ref(true);
+  loggedIn = ref(JSON.parse(localStorage.getItem("loggedIn") || "false")),
+  loginState = ref(true),
+  loginMessage = ref({ en: "", ar: "" }) as Ref<THashMap>;
+
 // methods
 const load = () => {
   mode.value.isBusy = true;
@@ -61,15 +73,29 @@ const logout = async () => {
   await load();
   router.replace({ name: "login" });
   loggedIn.value = false;
+  loginState.value = true;
+  localStorage.setItem("loggedIn", JSON.stringify(false));
 };
 
-const validateLogin = async () => {
-  loggedIn.value = true;
-  await load();
-  router.replace({ name: "home" });
+const validateLogin = async (usernanme: string, password: string) => {
+  const result = (await validate(usernanme, password)) as TValidationResult;
+  if (!result.success) {
+    loginState.value = false;
+    loginMessage.value = result.message;
+  } else {
+    loggedIn.value = true;
+    localStorage.setItem("loggedIn", JSON.stringify(true));
+    await load();
+    router.replace({ name: "home" });
+  }
 };
 
 // watchers
+watch(loggedIn.value, (newLogin) => {
+  localStorage.setItem("loggedIn", JSON.stringify(newLogin));
+  loggedIn.value = JSON.parse(localStorage.getItem("loggedIn") || "false");
+});
+
 watch(lang, (newLang) => {
   document.dir = newLang === "ar" ? "rtl" : "ltr";
 });

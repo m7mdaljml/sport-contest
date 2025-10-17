@@ -28,7 +28,7 @@
           v-model="username"
           type="text"
           class="form-control form-control"
-          :class="{ 'border-danger': !loginState }"
+          :class="{ 'border-danger': !loginState && username.length }"
           :placeholder="tGlobal.enterUserName"
         />
       </div>
@@ -42,7 +42,7 @@
           v-model="password"
           type="password"
           class="form-control form-control"
-          :class="{ 'border-danger': !loginState }"
+          :class="{ 'border-danger': !loginState && password.length }"
           :placeholder="tGlobal.enterPass"
         />
       </div>
@@ -60,7 +60,7 @@
 
       <!-- Error Message -->
       <div v-if="!loginState" class="mt-3 text-danger fw-medium">
-        {{ tGlobal.invalidLogin }}
+        {{ loginMessage && (loginMessage as any)[lang] }}
       </div>
     </div>
   </div>
@@ -70,8 +70,13 @@
 import { computed, ref } from "vue";
 import { default as ar } from "../../../i18n/ar";
 import { default as en } from "../../../i18n/en";
+import type { THashMap } from "../../utilities/validate";
 
-const props = defineProps<{ lang: string; loginState: boolean }>();
+const props = defineProps<{
+  lang: string;
+  loginState: boolean;
+  loginMessage: THashMap;
+}>();
 const emit = defineEmits(["validateLogin"]);
 
 const username = ref("");
