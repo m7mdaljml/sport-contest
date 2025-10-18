@@ -10,4 +10,7 @@ export default {
   login: "تسجيل الدخول",
   logout: "تسجيل الخروج",
   invalidLogin: "اسم المستخدم أو كلمة المرور غير صحيحة",
+  userType: "نوع المستخدم",
+  phoneNumber: "رقم الهاتف",
+  profile: "الملف الشخصي",
 };

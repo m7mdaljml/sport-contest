@@ -1,20 +1,8 @@
-type THashMap = {
-  en: string;
-  ar: string;
-};
-
-type TValidationResult = {
-  success: boolean;
-  message: THashMap;
-};
+import { users } from "./users";
+import type { TValidationResult } from "../meta/i-types";
 
 const USERNAME_MIN_LENGTH = 3;
 const PASSWORD_MIN_LENGTH = 6;
-
-const users = {
-  user1: "123456",
-  user2: "123456",
-};
 
 const validate = (username: string, password: string): TValidationResult => {
   if (!username || !password) {
@@ -47,8 +35,8 @@ const validate = (username: string, password: string): TValidationResult => {
     };
   }
 
-  const storedPassword = users[username as keyof typeof users];
-  if (!storedPassword) {
+  const user = users[username];
+  if (!user) {
     return {
       success: false,
       message: {
@@ -58,7 +46,7 @@ const validate = (username: string, password: string): TValidationResult => {
     };
   }
 
-  if (storedPassword !== password) {
+  if (!user.validatePassword(password)) {
     return {
       success: false,
       message: {
@@ -77,5 +65,4 @@ const validate = (username: string, password: string): TValidationResult => {
   };
 };
 
-export type { TValidationResult, THashMap };
 export { validate };

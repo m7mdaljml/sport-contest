@@ -70,7 +70,7 @@
 import { computed, ref } from "vue";
 import { default as ar } from "../../../i18n/ar";
 import { default as en } from "../../../i18n/en";
-import type { THashMap } from "../../utilities/validate";
+import type { THashMap } from "../../../domain/meta/i-types";
 
 const props = defineProps<{
   lang: string;

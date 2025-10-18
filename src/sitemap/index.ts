@@ -1,7 +1,7 @@
-import Home from "../presentation/pages/view/home.vue";
-import Contest from "../presentation/pages/view/contest.vue";
-import Profile from "../presentation/pages/view/profile.vue";
-import Login from "../presentation/pages/login/index.vue";
+import Home from "../presentation/pages/home/index.vue";
+import Contest from "../presentation/pages/contest/index.vue";
+import Profile from "../presentation/pages/profile/index.vue";
+import Login from "../presentation/components/login/index.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 export const routes = [
@@ -30,16 +30,13 @@ export const routes = [
     path: "/login",
     name: "login",
     component: Login,
-    icon: "person",
     meta: { label: { en: "Login", ar: "تسجيل الدخول" } },
   },
 
-  // Redirect root to login
   {
     path: "/",
     redirect: "/login",
   },
-  // Catch all unmatched routes and redirect to login
   {
     path: "/:pathMatch(.*)*",
     redirect: "/login",

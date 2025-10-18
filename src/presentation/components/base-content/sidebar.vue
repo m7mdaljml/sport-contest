@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { routes } from "../../../router/index";
+import { routes } from "../../../sitemap/index";
 
 defineProps<{ isLight: boolean; lang: string }>();
 </script>

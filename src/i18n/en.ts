@@ -10,4 +10,7 @@ export default {
   login: "Login",
   logout: "Logout",
   invalidLogin: "Invalid username or password",
+  userType: "User Type",
+  phoneNumber: "Phone Number",
+  profile: "Profile",
 };
