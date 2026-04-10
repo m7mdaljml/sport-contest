@@ -7,7 +7,7 @@
     <ul class="nav flex-column">
       <li
         v-for="(route, index) in routes.filter(
-          (r) => r.name && r.name !== 'login'
+          (r) => r.name && r.name !== 'login',
         )"
         :key="index"
       >

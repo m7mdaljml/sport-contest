@@ -105,7 +105,7 @@ watch(
       router.replace({ name: "login" });
     }
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 // hooks
@@ -115,12 +115,12 @@ onMounted(async () => {
 
 // components
 const MainHeader = defineAsyncComponent(
-  () => import("../components/base-content/header.vue")
+  () => import("../components/base-content/header.vue"),
 );
 const Sidebar = defineAsyncComponent(
-  () => import("../components/base-content/sidebar.vue")
+  () => import("../components/base-content/sidebar.vue"),
 );
 const Loader = defineAsyncComponent(
-  () => import("../components/base-content/loader.vue")
+  () => import("../components/base-content/loader.vue"),
 );
 </script>

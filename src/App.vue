@@ -5,6 +5,6 @@
 import { defineAsyncComponent } from "vue";
 
 const MainLayout = defineAsyncComponent(
-  () => import("../src/presentation/pages/index.vue")
+  () => import("../src/presentation/pages/index.vue"),
 );
 </script>

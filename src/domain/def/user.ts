@@ -18,7 +18,7 @@ class User implements IUser {
     lastname = "",
     userType = "user",
     phoneNumber = "",
-    imageUrl = ""
+    imageUrl = "",
   ) {
     this.id = uid();
     this.username = username;
