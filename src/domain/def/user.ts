@@ -1,4 +1,5 @@
 import { uid } from "../utilities/generate-id";
+import { UserTypeEnum } from "../meta/enums/user-type";
 import type { IUser } from "../meta/i-user";
 
 class User implements IUser {
@@ -7,7 +8,7 @@ class User implements IUser {
   password: string;
   firstname: string;
   lastname: string;
-  userType: string;
+  userType: UserTypeEnum;
   phoneNumber: string;
   imageUrl: string;
 
@@ -16,7 +17,7 @@ class User implements IUser {
     password = "",
     firstname = "",
     lastname = "",
-    userType = "user",
+    userType = UserTypeEnum.Contestant,
     phoneNumber = "",
     imageUrl = "",
   ) {

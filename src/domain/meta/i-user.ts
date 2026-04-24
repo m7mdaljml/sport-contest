@@ -1,3 +1,5 @@
+import type { UserTypeEnum } from "./enums/user-type";
+
 interface IUser {
   id: string;
   username: string;
@@ -5,7 +7,7 @@ interface IUser {
   firstname: string;
   lastname: string;
   imageUrl: string;
-  userType: string;
+  userType: UserTypeEnum;
   phoneNumber: string;
 }
 
