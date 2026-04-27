@@ -1,3 +1,5 @@
+import { UserTypeEnum } from "../domain/meta/enums/user-type";
+
 export default {
   dark: "مظلم",
   light: "فاتح",
@@ -13,4 +15,10 @@ export default {
   userType: "نوع المستخدم",
   phoneNumber: "رقم الهاتف",
   profile: "الملف الشخصي",
+  enums: {
+    userTypeEnum: {
+      [UserTypeEnum.Admin]: "مسؤول",
+      [UserTypeEnum.Contestant]: "متسابق",
+    },
+  },
 };

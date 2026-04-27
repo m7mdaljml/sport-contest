@@ -16,7 +16,8 @@
         </h2>
         <div class="m-5">
           <p class="text-muted mb-2">
-            <strong>{{ tGlobal.userType }} : </strong> {{ user.userType }}
+            <strong>{{ tGlobal.userType }} : </strong>
+            {{ tGlobal.enums.userTypeEnum[user.userType] }}
           </p>
           <p class="text-muted mb-2">
             <strong>{{ tGlobal.phoneNumber }} : </strong>
