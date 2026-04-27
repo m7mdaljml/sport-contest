@@ -4,6 +4,8 @@ import Profile from "../presentation/pages/profile/index.vue";
 import Login from "../presentation/components/login/index.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
+const loggedIn = localStorage.getItem("loggedIn");
+
 export const routes = [
   {
     path: "/home",
@@ -35,11 +37,11 @@ export const routes = [
 
   {
     path: "/",
-    redirect: "/login",
+    redirect: !!loggedIn ? "/home" : "/login",
   },
   {
     path: "/:pathMatch(.*)*",
-    redirect: "/login",
+    redirect: !!loggedIn ? "/home" : "/login",
   },
 ];
 
