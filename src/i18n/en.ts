@@ -1,3 +1,5 @@
+import { UserTypeEnum } from "../domain/meta/enums/user-type";
+
 export default {
   dark: "Dark",
   light: "Light",
@@ -13,4 +15,10 @@ export default {
   userType: "User Type",
   phoneNumber: "Phone Number",
   profile: "Profile",
+  enums: {
+    userTypeEnum: {
+      [UserTypeEnum.Admin]: "Admin",
+      [UserTypeEnum.Contestant]: "Contestant",
+    },
+  },
 };
