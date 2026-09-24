@@ -7,11 +7,6 @@ A small practice project built using **Vue 3 + TypeScript + Vite**.
 - Vue 3
 - TypeScript
 - Vite
-- Axios
-
-## 🚧 Status
-
-This project is currently **under development**.
 
 ## 📖 About
 
@@ -21,8 +16,4 @@ The idea is:
 
 - Users will answer **random and varied sports-related questions**
 - Each correct answer increases the user's **score**
-- The **highest score** will be displayed on the user's profile
-
-## 🎯 Goal
-
-The goal of this project is to practice building interactive front-end applications, handling APIs, and managing user state and scoring logic.
+- The **highest score** will be displayed on the screen
