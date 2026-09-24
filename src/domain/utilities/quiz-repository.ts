@@ -79,16 +79,23 @@ const shuffleOptions = (q: QuizQuestion): QuizQuestion => {
   };
 };
 
+const resolveQuiz = (
+  indices: number[],
+  lang: Locale,
+  pool: LocalizedQuestion[] = FOOTBALL_QUESTIONS,
+): QuizQuestion[] => indices.map((i) => shuffleOptions(resolveLocale(lang)(pool[i])));
+
 const pickQuiz = (
   lang: Locale,
   perLevel: number = 5,
   imageCount: number = 5,
   pool: LocalizedQuestion[] = FOOTBALL_QUESTIONS,
   visitorId: string = "",
-): QuizQuestion[] => {
+): { questions: QuizQuestion[]; indices: number[] } => {
   const levels: QuestionLevel[] = ["low", "medium", "high"];
   const used = readUsed(visitorId);
-  const picked: LocalizedQuestion[] = [];
+
+  const pickedIndices: number[] = [];
 
   levels.forEach((lvl) => {
     const chosen = drawIndices(
@@ -98,7 +105,7 @@ const pickQuiz = (
       used[lvl],
     );
     used[lvl] = shuffle([...used[lvl], ...chosen]).slice(0, 150);
-    picked.push(...chosen.map((i) => pool[i]));
+    pickedIndices.push(...chosen);
   });
 
   const chosenImages = drawIndices(
@@ -108,10 +115,10 @@ const pickQuiz = (
     used.images,
   );
   used.images = shuffle([...used.images, ...chosenImages]).slice(0, 300);
-  picked.push(...chosenImages.map((i) => pool[i]));
+  pickedIndices.push(...chosenImages);
 
   if (visitorId) saveUsed(visitorId, used);
-  return shuffle(picked).map(resolveLocale(lang)).map(shuffleOptions);
+  return { questions: resolveQuiz(pickedIndices, lang, pool), indices: pickedIndices };
 };
 
 const readResults = (visitorId: string): QuizResult[] => {
@@ -149,4 +156,4 @@ const bestScore = (visitorId: string): QuizResult | null => {
 
 const attempts = (visitorId: string): number => readResults(visitorId).length;
 
-export { pickQuiz, saveResult, bestScore, attempts };
+export { pickQuiz, resolveQuiz, saveResult, bestScore, attempts };

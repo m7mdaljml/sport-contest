@@ -246,21 +246,25 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import { tGlobal, locale } from "../../../i18n";
 import { getVisitorId } from "../../../domain/utilities/identity";
 import { FOOTBALL_QUESTIONS } from "../../../domain/data/questions";
 import {
   pickQuiz,
+  resolveQuiz,
   saveResult,
   bestScore,
   attempts,
 } from "../../../domain/utilities/quiz-repository";
+import type { Locale } from "../../../i18n";
 import type { QuestionLevel, QuizQuestion } from "../../../domain/meta/i-quiz";
 
 const visitorId = ref("");
 const mode = ref<"intro" | "playing" | "result">("intro");
 const questions = ref<QuizQuestion[]>([]);
+const pickedIndices = ref<number[]>([]);
+const resolvedLang = ref<Locale>(locale.value);
 const current = ref(0);
 const selected = ref<number | null>(null);
 const answered = ref(false);
@@ -268,6 +272,7 @@ const score = ref(0);
 const feedback = ref("");
 const lastPraise = ref(-1);
 const lastBoo = ref(-1);
+const resultsVersion = ref(0);
 
 const funBg = [
   {
@@ -319,12 +324,14 @@ const question = computed<QuizQuestion>(
   () => questions.value[current.value] as QuizQuestion,
 );
 
-const best = computed(() =>
-  visitorId.value ? bestScore(visitorId.value) : null,
-);
-const attemptsCount = computed(() =>
-  visitorId.value ? attempts(visitorId.value) : 0,
-);
+const best = computed(() => {
+  resultsVersion.value;
+  return visitorId.value ? bestScore(visitorId.value) : null;
+});
+const attemptsCount = computed(() => {
+  resultsVersion.value;
+  return visitorId.value ? attempts(visitorId.value) : 0;
+});
 
 const pct = computed(() =>
   questions.value.length
@@ -358,7 +365,10 @@ const pickFeedback = (
 };
 
 const start = () => {
-  questions.value = pickQuiz(locale.value, 5, 5, undefined, visitorId.value);
+  const picked = pickQuiz(locale.value, 5, 5, undefined, visitorId.value);
+  questions.value = picked.questions;
+  pickedIndices.value = picked.indices;
+  resolvedLang.value = locale.value;
   current.value = 0;
   selected.value = null;
   answered.value = false;
@@ -398,6 +408,7 @@ const next = () => {
   }
   if (visitorId.value) {
     saveResult(visitorId.value, score.value, questions.value.length);
+    resultsVersion.value += 1;
   }
   mode.value = "result";
 };
@@ -406,6 +417,27 @@ const quit = () => {
   feedback.value = "";
   mode.value = "intro";
 };
+
+watch(locale, (lang) => {
+  if (mode.value !== "playing" || pickedIndices.value.length === 0) return;
+  const list = resolveQuiz(pickedIndices.value, lang, FOOTBALL_QUESTIONS);
+  if (answered.value && question.value) {
+    const poolQ = FOOTBALL_QUESTIONS[pickedIndices.value[current.value]];
+    const oldOptions = poolQ.o[resolvedLang.value];
+    const newOptions = poolQ.o[lang];
+    list[current.value] = {
+      q: poolQ.q[lang],
+      o: question.value.o.map(
+        (txt) => newOptions[oldOptions.indexOf(txt)],
+      ) as QuizQuestion["o"],
+      a: question.value.a,
+      lvl: question.value.lvl,
+      img: question.value.img,
+    };
+  }
+  questions.value = list;
+  resolvedLang.value = lang;
+});
 
 const optKey = (i: number): string =>
   ["A", "B", "C", "D"][i] ?? String.fromCharCode(65 + i);
