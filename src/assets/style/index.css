@@ -71,6 +71,7 @@ body {
 }
 
 .panel {
+  position: relative;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 20px;
@@ -82,6 +83,7 @@ body {
 }
 
 .page {
+  position: relative;
   padding: 1.75rem 2rem 2.5rem;
 }
 
@@ -97,6 +99,7 @@ body {
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 12px 26px -10px rgba(1, 64, 108, 0.5);
+  transition: transform 0.25s ease, rotate 0.25s ease;
 }
 
 .brand-logo img {
@@ -503,5 +506,253 @@ body {
 @media (max-width: 575.98px) {
   .score-num {
     font-size: 2.8rem;
+  }
+}
+
+/* ===== Fun & lively touches ===== */
+
+.header .navbar-brand:hover .brand-logo {
+  transform: rotate(-8deg) scale(1.08);
+}
+
+.fun-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.fun-bg span {
+  position: absolute;
+  bottom: -70px;
+  font-size: var(--size, 1.6rem);
+  opacity: 0;
+  animation: floatUp var(--dur, 16s) linear infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(-10deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: var(--opa, 0.28);
+  }
+  88% {
+    opacity: var(--opa, 0.28);
+  }
+  100% {
+    transform: translateY(-115vh) rotate(16deg);
+    opacity: 0;
+  }
+}
+
+.quiz-wrap {
+  position: relative;
+  z-index: 1;
+}
+
+.quiz-logo {
+  animation: ballBounce 2.6s ease-in-out infinite;
+}
+
+@keyframes ballBounce {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(5deg);
+  }
+}
+
+.quiz-progress .bar {
+  position: relative;
+  overflow: hidden;
+}
+
+.quiz-progress .bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 40%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.55),
+    transparent
+  );
+  animation: sweep 2.2s ease-in-out infinite;
+}
+
+@keyframes sweep {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(420%);
+  }
+}
+
+.quiz-chip.score-chip {
+  animation: scorePop 0.5s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+@keyframes scorePop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.28);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.quiz-option.correct {
+  animation: optPop 0.35s cubic-bezier(0.34, 1.4, 0.5, 1);
+}
+
+@keyframes optPop {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.quiz-option.wrong {
+  animation: optShake 0.4s ease;
+}
+
+@keyframes optShake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-7px);
+  }
+  40% {
+    transform: translateX(7px);
+  }
+  60% {
+    transform: translateX(-5px);
+  }
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+.quiz-feedback.ok,
+.quiz-feedback.bad {
+  animation: fbPop 0.45s cubic-bezier(0.34, 1.5, 0.5, 1);
+}
+
+@keyframes fbPop {
+  0% {
+    transform: scale(0.6) translateY(4px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.confetti span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  font-size: 1.7rem;
+  line-height: 1;
+  opacity: 1;
+  transform: translate(-50%, -50%);
+  animation: confetti 0.9s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+  animation-delay: var(--d, 0s);
+}
+
+@keyframes confetti {
+  0% {
+    transform: translate(-50%, -50%) scale(0.3) rotate(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(
+        calc(-50% + var(--tx)),
+        calc(-50% + var(--ty))
+      )
+      scale(1.15) rotate(var(--rot));
+    opacity: 0;
+  }
+}
+
+.verdict {
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: linear-gradient(
+    135deg,
+    rgba(13, 84, 148, 0.08),
+    rgba(192, 31, 62, 0.08)
+  );
+  animation: fbPop 0.6s cubic-bezier(0.34, 1.4, 0.5, 1) 0.15s both;
+}
+
+.verdict .verdict-head {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+.verdict .verdict-line {
+  color: var(--text-soft);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.score-ring {
+  animation: ringIn 0.6s cubic-bezier(0.34, 1.4, 0.5, 1) 0.1s both;
+}
+
+@keyframes ringIn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.result-stat .stat-value .fa-trophy {
+  animation: trophyBounce 1.5s ease-in-out infinite;
+  transform-origin: 50% 100%;
+}
+
+@keyframes trophyBounce {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-7deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(7deg);
   }
 }

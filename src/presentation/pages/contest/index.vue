@@ -1,5 +1,8 @@
 <template>
   <div class="page">
+    <div class="fun-bg" aria-hidden="true">
+      <span v-for="(b, i) in funBg" :key="i" :style="b.style">{{ b.e }}</span>
+    </div>
     <div class="quiz-wrap">
       <div v-if="mode === 'intro'" class="panel p-4 p-md-5 text-center">
         <div class="quiz-logo mb-4">
@@ -18,7 +21,7 @@
           </span>
           <span class="quiz-chip">
             <font-awesome-icon icon="trophy" />
-            {{ best ? `${best.score}/${best.total}` : "—" }} ·
+            {{ best ? `${best.score}/${best.total}` : "-" }} ·
             {{ tGlobal.quiz.best }}
           </span>
         </div>
@@ -40,7 +43,12 @@
 
         <span class="quiz-chip mb-4">
           <font-awesome-icon icon="layer-group" />
-          {{ tGlobal.quiz.poolNote.replace("{n}", String(FOOTBALL_QUESTIONS.length)) }}
+          {{
+            tGlobal.quiz.poolNote.replace(
+              "{n}",
+              String(FOOTBALL_QUESTIONS.length),
+            )
+          }}
         </span>
 
         <div>
@@ -59,16 +67,38 @@
       <div v-if="mode === 'playing'">
         <div class="panel p-4 p-md-5">
           <div
+            v-if="answered && selected === question.a"
+            :key="'burst-' + current"
+            class="confetti"
+            aria-hidden="true"
+          >
+            <span
+              v-for="(c, i) in burst"
+              :key="i"
+              :style="{
+                '--tx': c.x + 'px',
+                '--ty': c.y + 'px',
+                '--rot': c.r + 'deg',
+                '--d': c.d + 's',
+              }"
+            >
+              {{ c.e }}
+            </span>
+          </div>
+          <div
             class="d-flex justify-content-between align-items-center gap-2 mb-3"
           >
             <span class="quiz-counter">
               {{ questionOf(current + 1, questions.length) }}
             </span>
-            <span class="quiz-lvl" :class="question.img ? 'lvl-pic' : 'lvl-' + question.lvl">
+            <span
+              class="quiz-lvl"
+              :class="question.img ? 'lvl-pic' : 'lvl-' + question.lvl"
+            >
               {{ chipText(question) }}
             </span>
             <span class="d-flex align-items-center gap-2">
-              <span class="quiz-chip">
+              <span class="quiz-chip score-chip" :key="'score-' + score">
                 <font-awesome-icon icon="star" />
                 {{ score }}
               </span>
@@ -133,11 +163,7 @@
                   selected === question.a ? 'circle-check' : 'circle-xmark'
                 "
               />
-              {{
-                selected === question.a
-                  ? tGlobal.quiz.correct
-                  : tGlobal.quiz.wrong
-              }}
+              {{ feedback }}
             </span>
             <span v-else></span>
             <button
@@ -173,12 +199,17 @@
           </div>
         </div>
 
+        <div class="verdict mb-4">
+          <div class="verdict-head">{{ verdict.head }}</div>
+          <div class="verdict-line">{{ verdict.line }}</div>
+        </div>
+
         <div class="row g-3 mb-4">
           <div class="col-6">
             <div class="result-stat panel p-3">
               <div class="stat-value">
                 <font-awesome-icon icon="trophy" class="text-primary me-2" />
-                {{ best ? best.score + "/" + best.total : "—" }}
+                {{ best ? best.score + "/" + best.total : "-" }}
               </div>
               <div class="stat-label">{{ tGlobal.quiz.best }}</div>
             </div>
@@ -234,6 +265,55 @@ const current = ref(0);
 const selected = ref<number | null>(null);
 const answered = ref(false);
 const score = ref(0);
+const feedback = ref("");
+const lastPraise = ref(-1);
+const lastBoo = ref(-1);
+
+const funBg = [
+  {
+    e: "⚽",
+    style: "left: 8%; --size: 1.6rem; --dur: 14s; --delay: 0s; --opa: .25",
+  },
+  {
+    e: "🏆",
+    style: "left: 22%; --size: 2rem; --dur: 18s; --delay: 3s; --opa: .20",
+  },
+  {
+    e: "🔥",
+    style: "left: 38%; --size: 1.4rem; --dur: 16s; --delay: 6s; --opa: .22",
+  },
+  {
+    e: "🥅",
+    style: "left: 55%; --size: 1.9rem; --dur: 20s; --delay: 1s; --opa: .18",
+  },
+  {
+    e: "🎯",
+    style: "left: 70%; --size: 1.5rem; --dur: 15s; --delay: 8s; --opa: .22",
+  },
+  {
+    e: "📺",
+    style: "left: 86%; --size: 1.7rem; --dur: 17s; --delay: 4s; --opa: .18",
+  },
+  {
+    e: "💥",
+    style: "left: 14%; --size: 1.3rem; --dur: 22s; --delay: 11s; --opa: .20",
+  },
+  {
+    e: "🧤",
+    style: "left: 66%; --size: 1.5rem; --dur: 19s; --delay: 9s; --opa: .18",
+  },
+];
+
+const burst = [
+  { e: "🎉", x: -150, y: -130, r: -30, d: 0 },
+  { e: "⚽", x: 150, y: -115, r: 28, d: 0.05 },
+  { e: "⭐", x: -105, y: -175, r: -18, d: 0.1 },
+  { e: "🏆", x: 120, y: -180, r: 22, d: 0.15 },
+  { e: "🎉", x: -55, y: -215, r: -12, d: 0.2 },
+  { e: "⚽", x: 70, y: -225, r: 16, d: 0.25 },
+  { e: "🔥", x: -165, y: -55, r: -35, d: 0.1 },
+  { e: "💥", x: 170, y: -45, r: 38, d: 0.18 },
+];
 
 const question = computed<QuizQuestion>(
   () => questions.value[current.value] as QuizQuestion,
@@ -252,6 +332,12 @@ const pct = computed(() =>
     : 0,
 );
 
+const verdict = computed(
+  () =>
+    tGlobal.value.quiz.verdicts.find((v) => pct.value >= v.at) ??
+    tGlobal.value.quiz.verdicts[tGlobal.value.quiz.verdicts.length - 1]!,
+);
+
 const progressPct = computed(() =>
   questions.value.length
     ? Math.round(
@@ -261,12 +347,25 @@ const progressPct = computed(() =>
     : 0,
 );
 
+const pickFeedback = (
+  list: readonly string[],
+  last: number,
+): [string, number] => {
+  if (list.length <= 1) return [list[0] ?? "", 0];
+  let i = Math.floor(Math.random() * list.length);
+  if (i === last) i = (i + 1) % list.length;
+  return [list[i] as string, i];
+};
+
 const start = () => {
   questions.value = pickQuiz(locale.value, 5, 5, undefined, visitorId.value);
   current.value = 0;
   selected.value = null;
   answered.value = false;
   score.value = 0;
+  feedback.value = "";
+  lastPraise.value = -1;
+  lastBoo.value = -1;
   mode.value = "playing";
 };
 
@@ -274,7 +373,19 @@ const choose = (i: number) => {
   if (answered.value) return;
   selected.value = i;
   answered.value = true;
-  if (i === question.value.a) score.value += 1;
+  if (i === question.value.a) {
+    score.value += 1;
+    const [text, idx] = pickFeedback(
+      tGlobal.value.quiz.praise,
+      lastPraise.value,
+    );
+    feedback.value = text;
+    lastPraise.value = idx;
+  } else {
+    const [text, idx] = pickFeedback(tGlobal.value.quiz.boo, lastBoo.value);
+    feedback.value = text;
+    lastBoo.value = idx;
+  }
 };
 
 const next = () => {
@@ -282,6 +393,7 @@ const next = () => {
     current.value += 1;
     selected.value = null;
     answered.value = false;
+    feedback.value = "";
     return;
   }
   if (visitorId.value) {
@@ -291,6 +403,7 @@ const next = () => {
 };
 
 const quit = () => {
+  feedback.value = "";
   mode.value = "intro";
 };
 
