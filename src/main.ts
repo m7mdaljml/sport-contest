@@ -27,7 +27,9 @@ import {
   faArrowRight,
   faRotateRight,
   faGlobe,
+  faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
+import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 library.add(
   faTrophy,
@@ -45,6 +47,9 @@ library.add(
   faArrowRight,
   faRotateRight,
   faGlobe,
+  faEnvelope,
+  faGithub,
+  faLinkedin,
 );
 
 initLocale();

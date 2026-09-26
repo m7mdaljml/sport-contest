@@ -1,4 +1,7 @@
 export default {
+  footer: {
+    author: "Mohammad Aljamal",
+  },
   quiz: {
     title: "Football Quiz",
     subtitle: "Think you know football? Prove it - no VAR replays allowed. ⚽",

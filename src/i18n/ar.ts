@@ -1,4 +1,7 @@
 export default {
+  footer: {
+    author: "محمد الجمل",
+  },
   quiz: {
     title: "اختبار كرة القدم",
     subtitle: "هل تعتقد أنك تعرف كرة القدم؟ أثبت ذلك - بدون إعادة VAR. ⚽",
