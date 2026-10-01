@@ -3,7 +3,7 @@
     <div class="d-flex w-100 align-items-center justify-content-between">
       <router-link
         class="navbar-brand d-flex align-items-center"
-        :to="{ name: 'contest' }"
+        :to="{ name: 'challenges' }"
       >
         <span class="brand-logo me-2">
           <img :src="logo" alt="Visca Cup" />

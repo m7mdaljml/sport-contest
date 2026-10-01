@@ -252,6 +252,7 @@ body {
   color: var(--primary);
   font-weight: 600;
   font-size: 0.9rem;
+  text-decoration: none;
   transition: all 0.2s ease;
 }
 
@@ -322,14 +323,24 @@ body {
   color: #16a34a;
 }
 
+.quiz-lvl.lvl-easy {
+  background: rgba(34, 197, 94, 0.14);
+  color: #16a34a;
+}
+
 .quiz-lvl.lvl-medium {
   background: rgba(245, 158, 11, 0.16);
   color: #d97706;
 }
 
-.quiz-lvl.lvl-high {
+.quiz-lvl.lvl-hard {
   background: rgba(244, 63, 94, 0.14);
   color: #e11d48;
+}
+
+.quiz-lvl .who-stars {
+  font-size: 0.58rem;
+  margin-inline-start: 0.15rem;
 }
 
 .quiz-lvl.lvl-pic {
@@ -816,4 +827,714 @@ body {
   50% {
     transform: translateY(-5px) rotate(7deg);
   }
+}
+
+/* ---------------------------------- challenges hub ---------------------------------- */
+.challenge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  text-align: start;
+}
+
+.challenge-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.4rem;
+  text-decoration: none;
+  color: var(--text);
+  height: 100%;
+}
+
+.challenge-card:hover,
+.challenge-card:focus-visible {
+  transform: translateY(-4px);
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+
+.challenge-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  font-size: 1.5rem;
+  margin-bottom: 0.2rem;
+}
+
+.challenge-icon.tone-indigo {
+  background: rgba(99, 102, 241, 0.14);
+  color: #4f46e5;
+}
+
+.challenge-icon.tone-green {
+  background: rgba(22, 163, 74, 0.14);
+  color: #16a34a;
+}
+
+.challenge-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.challenge-desc {
+  color: var(--text-soft);
+  font-size: 0.92rem;
+  flex: 1 1 auto;
+}
+
+.challenge-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.challenge-go {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 0.9rem;
+}
+
+/* ---------------------------------- who am i: setup ---------------------------------- */
+.who-intro-pool {
+  display: flex;
+  justify-content: center;
+}
+
+.who-difficulty {
+  border: 0;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 720px;
+}
+
+.who-difficulty-legend {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin-bottom: 0.6rem;
+  float: none;
+  width: auto;
+}
+
+.who-difficulty-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.who-difficulty-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.9rem 0.6rem;
+  border-radius: 16px;
+  border: 2px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.who-difficulty-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-strong);
+}
+
+.who-difficulty-btn.is-active {
+  border-color: var(--primary);
+  box-shadow: 0 8px 22px -14px rgba(1, 64, 108, 0.7);
+  background: var(--primary-soft);
+}
+
+.who-difficulty-name {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.who-difficulty-meta {
+  font-size: 0.72rem;
+  color: var(--text-soft);
+  text-align: center;
+  line-height: 1.35;
+}
+
+.who-stars {
+  display: inline-flex;
+  gap: 0.15rem;
+  font-size: 0.62rem;
+  color: var(--border-strong);
+}
+
+.who-stars .is-on {
+  color: #f59e0b;
+}
+
+/* ---------------------------------- who am i: status bar ---------------------------------- */
+.who-statusbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.who-status-left,
+.who-status-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.who-status-right {
+  flex: 1 1 260px;
+  justify-content: flex-end;
+}
+
+.who-statusbar .who-progress {
+  flex: 1 1 90px;
+  min-width: 70px;
+  margin: 0;
+}
+
+.who-progress {
+  height: 7px;
+}
+
+.who-icon-btn {
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.streak-chip {
+  background: rgba(249, 115, 22, 0.14);
+  color: #ea580c;
+  animation: streakPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes streakPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+.who-timer {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4em 0.9em;
+  border-radius: 999px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.who-timer.is-warning {
+  background: rgba(245, 158, 11, 0.16);
+  color: #d97706;
+}
+
+.who-timer.is-critical {
+  background: rgba(225, 29, 72, 0.14);
+  color: #e11d48;
+  animation: timerBlink 1s steps(2, end) infinite;
+}
+
+.who-timer.is-idle {
+  opacity: 0.55;
+}
+
+@keyframes timerBlink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+/* ---------------------------------- who am i: question ---------------------------------- */
+.who-question-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.who-question-sub {
+  color: var(--text-soft);
+  font-size: 0.92rem;
+}
+
+.who-hidden {
+  position: relative;
+}
+
+.clue-list {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.clue-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.8rem 1rem;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  animation: clueIn 0.35s ease both;
+}
+
+.clue-card.is-just-revealed {
+  animation: clueIn 0.45s cubic-bezier(0.34, 1.4, 0.5, 1) both;
+  border-color: var(--primary);
+  background: var(--primary-soft);
+}
+
+.clue-card.is-locked {
+  opacity: 0.75;
+  border-style: dashed;
+}
+
+@keyframes clueIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.clue-badge {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25em 0.7em;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin-top: 0.1rem;
+}
+
+.clue-text {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+.clue-placeholder {
+  color: var(--text-soft);
+  opacity: 0.55;
+  letter-spacing: 0.1em;
+  user-select: none;
+}
+
+.who-question-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.who-reveal {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.who-reveal-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-size: 0.72rem;
+}
+
+.who-hidden-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  color: var(--text-soft);
+}
+
+.who-answer-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin-bottom: 0.4rem;
+}
+
+.who-answer-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.who-attempts {
+  margin: 0.75rem 0 0;
+  font-size: 0.8rem;
+  color: var(--text-soft);
+  font-weight: 600;
+}
+
+/* ---------------------------------- who am i: search ---------------------------------- */
+.who-search {
+  position: relative;
+}
+
+.who-search-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.who-search-icon {
+  position: absolute;
+  inset-inline-start: 1rem;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  pointer-events: none;
+}
+
+.who-search-input {
+  width: 100%;
+  padding: 0.85rem 2.9rem;
+  border-radius: 14px;
+  border: 2px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.who-search-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--primary-soft);
+}
+
+.who-search-clear {
+  position: absolute;
+  inset-inline-end: 0.6rem;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--text-soft);
+  cursor: pointer;
+  font-size: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.who-search-clear:hover {
+  color: var(--text);
+}
+
+.who-search-list {
+  position: absolute;
+  z-index: 30;
+  inset-inline: 0;
+  top: calc(100% + 0.35rem);
+  margin: 0;
+  padding: 0.3rem;
+  list-style: none;
+  max-height: 260px;
+  overflow-y: auto;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  animation: fbPop 0.18s ease both;
+}
+
+.who-search-option {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.55rem 0.7rem;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.who-search-option.is-active {
+  background: var(--primary-soft);
+}
+
+.who-search-face {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  object-fit: cover;
+  background: var(--surface-2);
+  flex-shrink: 0;
+}
+
+.who-search-name {
+  font-weight: 600;
+  font-size: 0.94rem;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.who-search-meta {
+  font-size: 0.75rem;
+  color: var(--text-soft);
+  flex-shrink: 0;
+}
+
+.who-search-empty {
+  margin: 0.5rem 0 0;
+  font-size: 0.82rem;
+  color: var(--text-soft);
+}
+
+/* ---------------------------------- who am i: feedback ---------------------------------- */
+.who-feedback {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 1.25rem;
+  padding: 0.95rem 1.1rem;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  animation: fbPop 0.4s cubic-bezier(0.34, 1.4, 0.5, 1) both;
+}
+
+.who-feedback-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.who-feedback-body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.who-feedback-head {
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+.who-feedback-answer {
+  color: var(--primary);
+  font-weight: 700;
+  margin-inline-start: 0.35rem;
+}
+
+.who-feedback-line {
+  color: var(--text-soft);
+  font-size: 0.86rem;
+}
+
+.who-feedback-points {
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: #16a34a;
+  flex-shrink: 0;
+}
+
+.who-feedback.is-ok {
+  border-color: rgba(22, 163, 74, 0.35);
+  background: rgba(22, 163, 74, 0.1);
+}
+
+.who-feedback.is-ok .who-feedback-icon {
+  color: #16a34a;
+}
+
+.who-feedback.is-bad {
+  border-color: rgba(225, 29, 72, 0.3);
+  background: rgba(225, 29, 72, 0.08);
+}
+
+.who-feedback.is-bad .who-feedback-icon {
+  color: #e11d48;
+}
+
+.who-feedback.is-out {
+  border-color: rgba(245, 158, 11, 0.35);
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.who-feedback.is-out .who-feedback-icon {
+  color: #d97706;
+}
+
+.who-next {
+  margin-top: 1.25rem;
+}
+
+/* ---------------------------------- who am i: results ---------------------------------- */
+.ring-sub .stat-label {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: none;
+}
+
+.who-log-face {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  object-fit: cover;
+  background: var(--surface-2);
+  flex-shrink: 0;
+}
+
+.who-log-name {
+  font-weight: 700;
+  font-size: 0.92rem;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 45%;
+}
+
+.who-log-meta {
+  font-size: 0.78rem;
+  color: var(--text-soft);
+  margin-inline-start: auto;
+  flex-shrink: 0;
+}
+
+.quiz-intro-list .qicon.ok {
+  background: rgba(22, 163, 74, 0.14);
+  color: #16a34a;
+}
+
+.quiz-intro-list .qicon.bad {
+  background: rgba(225, 29, 72, 0.12);
+  color: #e11d48;
+}
+
+/* ---------------------------------- responsive ---------------------------------- */
+@media (max-width: 767.98px) {
+  .who-statusbar {
+    gap: 0.5rem;
+  }
+
+  .who-status-right {
+    justify-content: flex-start;
+    flex: 1 1 100%;
+    order: 3;
+  }
+
+  .who-difficulty-row {
+    grid-template-columns: 1fr;
+  }
+
+  .who-answer-buttons .btn-primary {
+    flex: 1 1 100%;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .clue-card {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .who-feedback {
+    flex-wrap: wrap;
+  }
+
+  .who-log-name {
+    max-width: 100%;
+  }
+
+  .who-log-meta {
+    margin-inline-start: 0;
+    width: 100%;
+  }
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-soft);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.back-link:hover,
+.back-link:focus-visible {
+  color: var(--primary);
+  border-color: var(--primary);
+  background: var(--primary-soft);
+}
+
+[dir="rtl"] .back-link svg {
+  transform: scaleX(-1);
 }

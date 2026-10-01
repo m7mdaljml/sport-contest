@@ -4,6 +4,7 @@
       <span v-for="(b, i) in funBg" :key="i" :style="b.style">{{ b.e }}</span>
     </div>
     <div class="quiz-wrap">
+      <back-link v-if="mode !== 'result'" class="mb-3" />
       <div v-if="mode === 'intro'" class="panel p-4 p-md-5 text-center">
         <div class="quiz-logo mb-4">
           <font-awesome-icon icon="futbol" />
@@ -239,6 +240,13 @@
             <font-awesome-icon icon="xmark" class="me-2" />
             {{ tGlobal.quiz.quit }}
           </button>
+          <router-link
+            class="btn-ghost btn-lg rounded-pill px-5"
+            :to="{ name: 'challenges' }"
+          >
+            <font-awesome-icon icon="arrow-left" class="me-2" />
+            {{ tGlobal.challenges.back }}
+          </router-link>
         </div>
       </div>
     </div>
@@ -259,6 +267,7 @@ import {
 } from "../../../domain/utilities/quiz-repository";
 import type { Locale } from "../../../i18n";
 import type { QuestionLevel, QuizQuestion } from "../../../domain/meta/i-quiz";
+import BackLink from "../../components/base-content/back-link.vue";
 
 const visitorId = ref("");
 const mode = ref<"intro" | "playing" | "result">("intro");
