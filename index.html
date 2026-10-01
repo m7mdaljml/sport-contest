@@ -10,9 +10,121 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet" />
   <title>Visca Cup</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      background: #01406c;
+    }
+
+    #splash {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #01406c 0%, #1667a6 50%, #c01f3e 100%);
+      opacity: 1;
+      transition: opacity 0.45s ease;
+    }
+
+    #splash.splash--hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #splash .splash__inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+    }
+
+    #splash .splash__logo {
+      width: 132px;
+      height: 132px;
+      border-radius: 40px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 26px 60px -18px rgba(0, 0, 0, 0.55);
+      animation: splashPulse 1.6s ease-in-out infinite;
+    }
+
+    #splash .splash__logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    #splash .splash__title {
+      font-family: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+    }
+
+    #splash .splash__bar {
+      width: 148px;
+      height: 5px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.22);
+      overflow: hidden;
+    }
+
+    #splash .splash__bar span {
+      display: block;
+      width: 45%;
+      height: 100%;
+      border-radius: 99px;
+      background: #ffffff;
+      animation: splashSlide 1.15s ease-in-out infinite;
+    }
+
+    @keyframes splashPulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.06);
+      }
+    }
+
+    @keyframes splashSlide {
+      0% {
+        transform: translateX(-100%);
+      }
+
+      100% {
+        transform: translateX(320%);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      #splash .splash__logo,
+      #splash .splash__bar span {
+        animation: none;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <div id="splash">
+    <div class="splash__inner">
+      <div class="splash__logo">
+        <img src="./src/assets/images/logo.png" alt="Visca Cup" />
+      </div>
+      <div class="splash__title">Visca Cup</div>
+      <div class="splash__bar"><span></span></div>
+    </div>
+  </div>
   <div id="app"></div>
   <script type="module" src="/src/main.ts"></script>
   <script type="text/javascript">
